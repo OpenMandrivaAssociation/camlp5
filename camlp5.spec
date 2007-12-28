@@ -1,12 +1,12 @@
 %define name	camlp5
-%define version	4.08
-%define release	%mkrel 2
+%define version	5.06
+%define release	%mkrel 1
 
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
 Summary:	A preprocessor-pretty-printer of ocaml
-Source: 	http://pauillac.inria.fr/~ddr/camlp5/%{name}-%{version}.tgz
+Source: 	http://pauillac.inria.fr/~ddr/camlp5/distrib/src/%{name}-%{version}.tgz
 URL:		http://pauillac.inria.fr/~ddr/camlp5
 License:	GPL
 Group:		Development/Other
