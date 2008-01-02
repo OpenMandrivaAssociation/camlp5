@@ -11,6 +11,7 @@ URL:		http://pauillac.inria.fr/~ddr/camlp5
 License:	GPL
 Group:		Development/Other
 BuildRequires:	ocaml
+BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 Camlp5 is a preprocessor-pretty-printer of ocaml.
