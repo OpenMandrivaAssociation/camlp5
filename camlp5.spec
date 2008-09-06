@@ -1,6 +1,6 @@
 %define name	camlp5
 %define version	5.09
-%define release	%mkrel 1
+%define release	%mkrel 2
 
 Name:		%{name}
 Version:	%{version}
@@ -22,13 +22,13 @@ It is compatible with OCaml versions from 3.08.1 to 3.11 included.
 %setup -q
 
 %build
-./configure -libdir %{ocaml_sitelib}
+./configure -libdir %{_libdir}/ocaml
 make world.opt
 
 %install
 rm -rf %{buildroot}
 make install \
-    LIBDIR=%{buildroot}%{ocaml_sitelib} \
+    LIBDIR=%{buildroot}%{_libdir}/ocaml \
     MANDIR=%{buildroot}%{_mandir} \
     BINDIR=%{buildroot}%{_bindir}
 
@@ -38,6 +38,6 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 %doc CHANGES DEVEL ICHANGES INSTALL LICENSE README UPGRADING doc/html
-%{ocaml_sitelib}/camlp5
+%{_libdir}/ocaml/camlp5
 %{_bindir}/*
 %{_mandir}/man1/*
