@@ -1,5 +1,5 @@
 %define name	camlp5
-%define version	5.13
+%define version	5.14
 %define release	%mkrel 1
 
 Name:		%{name}
@@ -11,7 +11,6 @@ Group:		Development/Other
 URL:		http://pauillac.inria.fr/~ddr/camlp5
 Source1:        camlp5-META
 Source: 	http://pauillac.inria.fr/~ddr/camlp5/distrib/src/%{name}-%{version}.tgz
-Patch1:         0002-Fix-typos-in-manpage.patch
 BuildRequires:	ocaml
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 
@@ -22,7 +21,6 @@ It is compatible with OCaml versions from 3.08.1 to 3.11 included.
 
 %prep
 %setup -q
-%patch1 -p 1
 
 %build
 ./configure -libdir %{_libdir}/ocaml
