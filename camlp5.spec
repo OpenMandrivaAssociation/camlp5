@@ -1,6 +1,6 @@
 %define name	camlp5
-%define version	5.14
-%define release	%mkrel 2
+%define version	5.15
+%define release	%mkrel 1
 
 Name:		%{name}
 Version:	%{version}
