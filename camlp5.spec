@@ -1,5 +1,5 @@
 Name:		camlp5
-Version:	6.03
+Version:	6.05
 Release:	1
 Summary:	A preprocessor-pretty-printer of ocaml
 License:	BSD
@@ -19,10 +19,10 @@ It is compatible with OCaml versions from 3.08.1 to 3.11 included.
 
 %build
 ./configure -libdir %{_libdir}/ocaml
-make world.opt
+%__make world.opt
 
 %install
-make install \
+%__make install \
     LIBDIR=%{buildroot}%{_libdir}/ocaml \
     MANDIR=%{buildroot}%{_mandir} \
     BINDIR=%{buildroot}%{_bindir}
