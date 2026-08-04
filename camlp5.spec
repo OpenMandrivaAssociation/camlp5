@@ -1,12 +1,13 @@
 Name:		camlp5
 Version:	8.05.02
-Release:	2
+Release:	3
 Summary:	A preprocessor-pretty-printer of OCaml
 License:	BSD
 Group:		Development/Other
 URL:		https://camlp5.github.io/
 Source0:	https://github.com/camlp5/camlp5/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:	camlp5-META
+Source2:	quotedext-nopcre.ml
 BuildRequires:	make
 BuildRequires:	ocaml
 BuildRequires:	ocaml-compiler
