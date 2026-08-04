@@ -1,6 +1,6 @@
 Name:		camlp5
 Version:	8.02.01
-Release:	1
+Release:	2
 Summary:	A preprocessor-pretty-printer of ocaml
 License:	BSD
 Group:		Development/Other
