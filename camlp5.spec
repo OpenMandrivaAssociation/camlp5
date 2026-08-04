@@ -2,7 +2,7 @@
 %define debug_package %{nil}
 Name:		camlp5
 Version:	8.05.02
-Release:	10
+Release:	11
 Summary:	A preprocessor-pretty-printer of OCaml
 License:	BSD
 Group:		Development/Other
@@ -58,10 +58,13 @@ if [ -f etc/topfind.camlp5 ]; then
 	cp -a etc/topfind.camlp5 %{buildroot}%{_libdir}/ocaml/
 fi
 install -d %{buildroot}%{_libdir}/ocaml/camlp5
-install -m 644 %{SOURCE1} %{buildroot}%{_libdir}/ocaml/camlp5/META
+%{_libdir}/ocaml/topfind.camlp5
+install -m 644 %{SOURCE1} %{buildroot}%{_libdir}/ocaml/camlp5
+%{_libdir}/ocaml/topfind.camlp5/META
 
 %files
 %doc CHANGES* DEVEL ICHANGES LICENSE README* UPGRADING doc/html
 %{_libdir}/ocaml/camlp5
+%{_libdir}/ocaml/topfind.camlp5
 %{_bindir}/*
 %{_mandir}/man1/*
