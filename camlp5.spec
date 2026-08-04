@@ -1,6 +1,6 @@
 Name:		camlp5
 Version:	8.05.02
-Release:	7
+Release:	8
 Summary:	A preprocessor-pretty-printer of OCaml
 License:	BSD
 Group:		Development/Other
@@ -42,10 +42,18 @@ sed -i 's/all: $(COUT) META mkcamlp5$(EXE)/all: $(COUT) META/' scripts/Makefile 
 %make_build world.opt
 
 %install
+# Makefile joins DESTDIR+LIBDIR/BINDIR/MANDIR; do not put buildroot in the dirs
 %make_install \
-	LIBDIR=%{buildroot}%{_libdir}/ocaml \
-	MANDIR=%{buildroot}%{_mandir} \
-	BINDIR=%{buildroot}%{_bindir}
+	DESTDIR=%{buildroot} \
+	LIBDIR=%{_libdir}/ocaml \
+	MANDIR=%{_mandir} \
+	BINDIR=%{_bindir}
+# topfind path in upstream is wrong when LIBDIR already ends in /ocaml
+install -d %{buildroot}%{_libdir}/ocaml
+if [ -f etc/topfind.camlp5 ]; then
+	cp -a etc/topfind.camlp5 %{buildroot}%{_libdir}/ocaml/
+fi
+install -d %{buildroot}%{_libdir}/ocaml/camlp5
 install -m 644 %{SOURCE1} %{buildroot}%{_libdir}/ocaml/camlp5/META
 
 %files
