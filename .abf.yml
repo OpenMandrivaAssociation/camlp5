@@ -2,3 +2,4 @@ sources:
   camlp5-8.05.02.tar.gz: 4fe31c518037cce7bf6424e380ee9a988507183c
   camlp5-META: c8d9792196108508174d6890292e504760051198
   quotedext-nopcre.ml: b14a2e2967d4fa21e24c111b8c1ce671e45d29f3
+  patch-nopcre.py: 0bfb2076c7c0fe552728f7fdb3c2e81681e99a22

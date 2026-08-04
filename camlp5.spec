@@ -1,6 +1,6 @@
 Name:		camlp5
 Version:	8.05.02
-Release:	4
+Release:	5
 Summary:	A preprocessor-pretty-printer of OCaml
 License:	BSD
 Group:		Development/Other
@@ -8,13 +8,13 @@ URL:		https://camlp5.github.io/
 Source0:	https://github.com/camlp5/camlp5/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:	camlp5-META
 Source2:	quotedext-nopcre.ml
+Source3:	patch-nopcre.py
 BuildRequires:	make
 BuildRequires:	ocaml
 BuildRequires:	ocaml-compiler
 BuildRequires:	ocaml-findlib
-# Stream/Genlex removed from OCaml 5 stdlib
+BuildRequires:	python
 BuildRequires:	camlp-streams-devel
-# Optional deps (rresult/bos/re/pcre2) are only needed for the testsuite
 
 %description
 Camlp5 is a preprocessor-pretty-printer for OCaml.
@@ -23,13 +23,13 @@ This version supports OCaml 4.08 through 5.5.
 
 %prep
 %autosetup -p1
-# Upstream hardcodes testsuite packages into every ocamlfind -package line.
-# Only camlp-streams is required to build/install (Stream/Genlex for OCaml 5+).
+# Drop unused testsuite packages from ocamlfind -package lines
 sed -i 's/C5PACKAGES="compiler-libs,compiler-libs.common,camlp-streams,rresult,bos,re,pcre2"/C5PACKAGES="compiler-libs,compiler-libs.common,camlp-streams"/' configure
 sed -i 's/C5PACKAGES="compiler-libs,compiler-libs.common,rresult,bos,re,pcre2"/C5PACKAGES="compiler-libs,compiler-libs.common"/' configure
-# Avoid ocaml-pcre2 dependency: quotedext only needs a simple matcher
+# Avoid ocaml-pcre2 (not yet in cooker): reimplement the two call sites without Pcre2
 cp -f %{SOURCE2} main/quotedext.ml
 cp -f %{SOURCE2} ocaml_src/main/quotedext.ml
+python %{SOURCE3}
 
 %build
 ./configure \
