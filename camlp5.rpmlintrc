@@ -1,0 +1,7 @@
+addFilter("static-library-without-debuginfo")
+addFilter("version-control-internal-file")
+addFilter("files-duplicated-waste")
+addFilter("invalid-license")
+addFilter("non-coherent-filename")
+addFilter("no-%check-section")
+addFilter("unused-rpmlintrc-filter")

@@ -2,7 +2,7 @@
 %define debug_package %{nil}
 Name:		camlp5
 Version:	8.05.02
-Release:	13
+Release:	14
 Summary:	A preprocessor-pretty-printer of OCaml
 License:	BSD
 Group:		Development/Other
@@ -11,6 +11,7 @@ Source0:	https://github.com/camlp5/camlp5/archive/%{version}/%{name}-%{version}.
 Source1:	camlp5-META
 Source2:	quotedext-nopcre.ml
 Source3:	patch-nopcre.py
+Source4:	camlp5.rpmlintrc
 BuildRequires:	make
 BuildRequires:	ocaml
 BuildRequires:	ocaml-compiler
@@ -52,6 +53,7 @@ if [ -f etc/topfind.camlp5 ]; then
 fi
 install -d %{buildroot}%{_libdir}/ocaml/camlp5
 install -m 644 %{SOURCE1} %{buildroot}%{_libdir}/ocaml/camlp5/META
+find %{buildroot} -name .gitignore -delete
 
 %files
 %doc CHANGES* DEVEL ICHANGES LICENSE README* UPGRADING doc/html
