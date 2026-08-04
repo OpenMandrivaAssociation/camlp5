@@ -2,7 +2,7 @@
 %define debug_package %{nil}
 Name:		camlp5
 Version:	8.05.02
-Release:	14
+Release:	15
 Summary:	A preprocessor-pretty-printer of OCaml
 License:	BSD
 Group:		Development/Other

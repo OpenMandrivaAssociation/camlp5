@@ -1,7 +1,5 @@
+# Only filters that apply to both src and binary where possible
+addFilter("invalid-license")
 addFilter("static-library-without-debuginfo")
 addFilter("version-control-internal-file")
 addFilter("files-duplicated-waste")
-addFilter("invalid-license")
-addFilter("non-coherent-filename")
-addFilter("no-%check-section")
-addFilter("unused-rpmlintrc-filter")
