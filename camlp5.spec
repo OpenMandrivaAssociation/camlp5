@@ -1,6 +1,6 @@
 Name:		camlp5
 Version:	8.05.02
-Release:	8
+Release:	9
 Summary:	A preprocessor-pretty-printer of OCaml
 License:	BSD
 Group:		Development/Other
@@ -32,6 +32,8 @@ cp -f %{SOURCE2} ocaml_src/main/quotedext.ml
 python %{SOURCE3}
 # mkcamlp5 helper needs bos/rresult/re/pcre2 (not packaged); skip it
 sed -i 's/all: $(COUT) META mkcamlp5$(EXE)/all: $(COUT) META/' etc/Makefile
+# Do not install mkcamlp5 helper (not built)
+sed -i '/cp mk\$(CAMLP5N)/d;/chmod a+x.*mk\$(CAMLP5N)/d' etc/Makefile
 # top/rprint needs fmt (not packaged); skip toplevel integration for now
 sed -i 's/DIRS=lib odyl main meta etc top ocpp man/DIRS=lib odyl main meta etc ocpp man/' Makefile
 sed -i 's/all: $(COUT) META mkcamlp5$(EXE)/all: $(COUT) META/' scripts/Makefile 2>/dev/null || :
@@ -57,7 +59,7 @@ install -d %{buildroot}%{_libdir}/ocaml/camlp5
 install -m 644 %{SOURCE1} %{buildroot}%{_libdir}/ocaml/camlp5/META
 
 %files
-%doc CHANGES* DEVEL ICHANGES INSTALL LICENSE README* UPGRADING doc/html
+%doc CHANGES* DEVEL ICHANGES LICENSE README* UPGRADING doc/html
 %{_libdir}/ocaml/camlp5
 %{_bindir}/*
 %{_mandir}/man1/*
