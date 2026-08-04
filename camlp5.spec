@@ -1,6 +1,6 @@
 Name:		camlp5
 Version:	8.05.02
-Release:	3
+Release:	4
 Summary:	A preprocessor-pretty-printer of OCaml
 License:	BSD
 Group:		Development/Other
@@ -27,6 +27,9 @@ This version supports OCaml 4.08 through 5.5.
 # Only camlp-streams is required to build/install (Stream/Genlex for OCaml 5+).
 sed -i 's/C5PACKAGES="compiler-libs,compiler-libs.common,camlp-streams,rresult,bos,re,pcre2"/C5PACKAGES="compiler-libs,compiler-libs.common,camlp-streams"/' configure
 sed -i 's/C5PACKAGES="compiler-libs,compiler-libs.common,rresult,bos,re,pcre2"/C5PACKAGES="compiler-libs,compiler-libs.common"/' configure
+# Avoid ocaml-pcre2 dependency: quotedext only needs a simple matcher
+cp -f %{SOURCE2} main/quotedext.ml
+cp -f %{SOURCE2} ocaml_src/main/quotedext.ml
 
 %build
 ./configure \
