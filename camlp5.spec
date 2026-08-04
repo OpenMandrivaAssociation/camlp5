@@ -2,7 +2,7 @@
 %define debug_package %{nil}
 Name:		camlp5
 Version:	8.05.02
-Release:	12
+Release:	13
 Summary:	A preprocessor-pretty-printer of OCaml
 License:	BSD
 Group:		Development/Other
@@ -17,6 +17,11 @@ BuildRequires:	ocaml-compiler
 BuildRequires:	ocaml-findlib
 BuildRequires:	python
 BuildRequires:	camlp-streams-devel
+BuildRequires:	ocaml-rresult-devel
+BuildRequires:	ocaml-bos-devel
+BuildRequires:	ocaml-re-devel
+BuildRequires:	ocaml-pcre2-devel
+BuildRequires:	ocaml-fmt-devel
 
 %description
 Camlp5 is a preprocessor-pretty-printer for OCaml.
@@ -25,20 +30,8 @@ This version supports OCaml 4.08 through 5.5.
 
 %prep
 %autosetup -p1
-# Drop unused testsuite packages from ocamlfind -package lines
-sed -i 's/C5PACKAGES="compiler-libs,compiler-libs.common,camlp-streams,rresult,bos,re,pcre2"/C5PACKAGES="compiler-libs,compiler-libs.common,camlp-streams"/' configure
-sed -i 's/C5PACKAGES="compiler-libs,compiler-libs.common,rresult,bos,re,pcre2"/C5PACKAGES="compiler-libs,compiler-libs.common"/' configure
-# Avoid ocaml-pcre2 (not yet in cooker): reimplement the two call sites without Pcre2
-cp -f %{SOURCE2} main/quotedext.ml
-cp -f %{SOURCE2} ocaml_src/main/quotedext.ml
-python %{SOURCE3}
-# mkcamlp5 helper needs bos/rresult/re/pcre2 (not packaged); skip it
-sed -i 's/all: $(COUT) META mkcamlp5$(EXE)/all: $(COUT) META/' etc/Makefile
-# Do not install mkcamlp5 helper (not built)
-sed -i '/cp mk\$(CAMLP5N)/d;/chmod a+x.*mk\$(CAMLP5N)/d' etc/Makefile
-# top/rprint needs fmt (not packaged); skip toplevel integration for now
-sed -i 's/DIRS=lib odyl main meta etc top ocpp man/DIRS=lib odyl main meta etc ocpp man/' Makefile
-sed -i 's/all: $(COUT) META mkcamlp5$(EXE)/all: $(COUT) META/' scripts/Makefile 2>/dev/null || :
+# Prefer full C5 package set when optional deps are available
+# (quotedext uses Pcre2; mkcamlp5 needs bos/rresult/re; top needs fmt)
 
 %build
 ./configure \
